@@ -708,6 +708,22 @@ namespace Google.GenAI {
             "explicitVadSignal parameter is not supported in Gemini API.");
       }
 
+      if (Common.GetValueByPath(fromObject, new string[] { "avatarConfig" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "avatarConfig" },
+                              Common.GetValueByPath(fromObject, new string[] { "avatarConfig" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "safetySettings" }) != null) {
+        JsonArray keyArray =
+            (JsonArray)Common.GetValueByPath(fromObject, new string[] { "safetySettings" });
+        JsonArray result = new JsonArray();
+
+        foreach (var record in keyArray) {
+          result.Add(SafetySettingToMldev(Common.ParseToJsonNode(record), toObject));
+        }
+        Common.SetValueByPath(toObject, new string[] { "safetySettings" }, result);
+      }
+
       return toObject;
     }
 
@@ -785,6 +801,16 @@ namespace Google.GenAI {
         Common.SetValueByPath(
             toObject, new string[] { "explicitVadSignal" },
             Common.GetValueByPath(fromObject, new string[] { "explicitVadSignal" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "avatarConfig" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "avatarConfig" },
+                              Common.GetValueByPath(fromObject, new string[] { "avatarConfig" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "safetySettings" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "safetySettings" },
+                              Common.GetValueByPath(fromObject, new string[] { "safetySettings" }));
       }
 
       return toObject;
@@ -922,6 +948,22 @@ namespace Google.GenAI {
             "explicitVadSignal parameter is not supported in Gemini API.");
       }
 
+      if (Common.GetValueByPath(fromObject, new string[] { "avatarConfig" }) != null) {
+        Common.SetValueByPath(parentObject, new string[] { "setup", "avatarConfig" },
+                              Common.GetValueByPath(fromObject, new string[] { "avatarConfig" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "safetySettings" }) != null) {
+        JsonArray keyArray =
+            (JsonArray)Common.GetValueByPath(fromObject, new string[] { "safetySettings" });
+        JsonArray result = new JsonArray();
+
+        foreach (var record in keyArray) {
+          result.Add(SafetySettingToMldev(Common.ParseToJsonNode(record), toObject));
+        }
+        Common.SetValueByPath(parentObject, new string[] { "setup", "safetySettings" }, result);
+      }
+
       return toObject;
     }
 
@@ -1052,6 +1094,16 @@ namespace Google.GenAI {
         Common.SetValueByPath(
             parentObject, new string[] { "setup", "explicitVadSignal" },
             Common.GetValueByPath(fromObject, new string[] { "explicitVadSignal" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "avatarConfig" }) != null) {
+        Common.SetValueByPath(parentObject, new string[] { "setup", "avatarConfig" },
+                              Common.GetValueByPath(fromObject, new string[] { "avatarConfig" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "safetySettings" }) != null) {
+        Common.SetValueByPath(parentObject, new string[] { "setup", "safetySettings" },
+                              Common.GetValueByPath(fromObject, new string[] { "safetySettings" }));
       }
 
       return toObject;
@@ -1476,6 +1528,26 @@ namespace Google.GenAI {
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "partMetadata" }))) {
         throw new NotSupportedException("partMetadata parameter is not supported in Vertex AI.");
+      }
+
+      return toObject;
+    }
+
+    internal JsonNode SafetySettingToMldev(JsonNode fromObject, JsonObject parentObject) {
+      JsonObject toObject = new JsonObject();
+
+      if (Common.GetValueByPath(fromObject, new string[] { "category" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "category" },
+                              Common.GetValueByPath(fromObject, new string[] { "category" }));
+      }
+
+      if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "method" }))) {
+        throw new NotSupportedException("method parameter is not supported in Gemini API.");
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "threshold" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "threshold" },
+                              Common.GetValueByPath(fromObject, new string[] { "threshold" }));
       }
 
       return toObject;

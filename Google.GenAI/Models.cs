@@ -716,6 +716,16 @@ namespace Google.GenAI {
         throw new NotSupportedException("autoTruncate parameter is not supported in Gemini API.");
       }
 
+      if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "documentOcr" }))) {
+        throw new NotSupportedException("documentOcr parameter is not supported in Gemini API.");
+      }
+
+      if (!Common.IsZero(
+              Common.GetValueByPath(fromObject, new string[] { "audioTrackExtraction" }))) {
+        throw new NotSupportedException(
+            "audioTrackExtraction parameter is not supported in Gemini API.");
+      }
+
       return toObject;
     }
 
@@ -734,7 +744,7 @@ namespace Google.GenAI {
         }
       } else if (discriminatorValueTaskType == "EMBED_CONTENT") {
         if (Common.GetValueByPath(fromObject, new string[] { "taskType" }) != null) {
-          Common.SetValueByPath(parentObject, new string[] { "taskType" },
+          Common.SetValueByPath(parentObject, new string[] { "embedContentConfig", "taskType" },
                                 Common.GetValueByPath(fromObject, new string[] { "taskType" }));
         }
       }
@@ -750,7 +760,7 @@ namespace Google.GenAI {
         }
       } else if (discriminatorValueTitle == "EMBED_CONTENT") {
         if (Common.GetValueByPath(fromObject, new string[] { "title" }) != null) {
-          Common.SetValueByPath(parentObject, new string[] { "title" },
+          Common.SetValueByPath(parentObject, new string[] { "embedContentConfig", "title" },
                                 Common.GetValueByPath(fromObject, new string[] { "title" }));
         }
       }
@@ -770,7 +780,7 @@ namespace Google.GenAI {
       } else if (discriminatorValueOutputDimensionality == "EMBED_CONTENT") {
         if (Common.GetValueByPath(fromObject, new string[] { "outputDimensionality" }) != null) {
           Common.SetValueByPath(
-              parentObject, new string[] { "outputDimensionality" },
+              parentObject, new string[] { "embedContentConfig", "outputDimensionality" },
               Common.GetValueByPath(fromObject, new string[] { "outputDimensionality" }));
         }
       }
@@ -798,8 +808,34 @@ namespace Google.GenAI {
         }
       } else if (discriminatorValueAutoTruncate == "EMBED_CONTENT") {
         if (Common.GetValueByPath(fromObject, new string[] { "autoTruncate" }) != null) {
-          Common.SetValueByPath(parentObject, new string[] { "autoTruncate" },
+          Common.SetValueByPath(parentObject, new string[] { "embedContentConfig", "autoTruncate" },
                                 Common.GetValueByPath(fromObject, new string[] { "autoTruncate" }));
+        }
+      }
+
+      JsonNode discriminatorDocumentOcr =
+          Common.GetValueByPath(rootObject, new string[] { "embeddingApiType" });
+      string discriminatorValueDocumentOcr = discriminatorDocumentOcr == null
+                                                 ? "PREDICT"
+                                                 : discriminatorDocumentOcr.GetValue<string>();
+      if (discriminatorValueDocumentOcr == "EMBED_CONTENT") {
+        if (Common.GetValueByPath(fromObject, new string[] { "documentOcr" }) != null) {
+          Common.SetValueByPath(parentObject, new string[] { "embedContentConfig", "documentOcr" },
+                                Common.GetValueByPath(fromObject, new string[] { "documentOcr" }));
+        }
+      }
+
+      JsonNode discriminatorAudioTrackExtraction =
+          Common.GetValueByPath(rootObject, new string[] { "embeddingApiType" });
+      string discriminatorValueAudioTrackExtraction =
+          discriminatorAudioTrackExtraction == null
+              ? "PREDICT"
+              : discriminatorAudioTrackExtraction.GetValue<string>();
+      if (discriminatorValueAudioTrackExtraction == "EMBED_CONTENT") {
+        if (Common.GetValueByPath(fromObject, new string[] { "audioTrackExtraction" }) != null) {
+          Common.SetValueByPath(
+              parentObject, new string[] { "embedContentConfig", "audioTrackExtraction" },
+              Common.GetValueByPath(fromObject, new string[] { "audioTrackExtraction" }));
         }
       }
 

@@ -690,7 +690,8 @@ namespace Google.GenAI {
         }
       }
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "examples" }))) {
-        throw new NotSupportedException("examples parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "examples parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       return toObject;
@@ -1072,7 +1073,8 @@ namespace Google.GenAI {
         body = ListTuningJobsParametersToVertex(parameterNode, new JsonObject(), parameterNode);
         path = Common.FormatMap("tuningJobs", body["_url"]);
       } else {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
       JsonObject? bodyObj = body?.AsObject();
       bodyObj?.Remove("_url");
@@ -1105,7 +1107,8 @@ namespace Google.GenAI {
       }
 
       if (!this._apiClient.VertexAI) {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
 
       return responseNode.Deserialize<ListTuningJobsResponse>() ??
@@ -1116,8 +1119,8 @@ namespace Google.GenAI {
     /// <summary>
     /// Cancels a tuning job resource.
     /// </summary>
-    /// <param name="name">The resource name of the tuning job. For Vertex, this is the full
-    /// resource name or `tuningJobs/{id}`.</param> <param name="config">A <see
+    /// <param name="name">The resource name of the tuning job. For Gemini Enterprise Agent Platform
+    /// , this is the full resource name or `tuningJobs/{id}`.</param> <param name="config">A <see
     /// cref="CancelTuningJobConfig"/> for configuring the cancel request.</param> <param
     /// name="cancellationToken">A <see cref="CancellationToken"/> to cancel the operation.</param>
 
@@ -1219,7 +1222,8 @@ namespace Google.GenAI {
                                                         parameterNode);
         path = Common.FormatMap("tuningJobs", body["_url"]);
       } else {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
       JsonObject? bodyObj = body?.AsObject();
       bodyObj?.Remove("_url");
@@ -1251,7 +1255,8 @@ namespace Google.GenAI {
       }
 
       if (!this._apiClient.VertexAI) {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
 
       return responseNode.Deserialize<TuningJob>() ??

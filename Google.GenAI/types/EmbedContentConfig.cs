@@ -67,7 +67,7 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
-    /// Vertex API only. The MIME type of the input.
+    /// Gemini Enterprise Agent Platform only. The MIME type of the input.
     /// </summary>
     [JsonPropertyName("mimeType")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -77,9 +77,9 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
-    /// Vertex API only. Whether to silently truncate inputs longer than the max sequence length. If
-    /// this option is set to false, oversized inputs will lead to an INVALID_ARGUMENT error,
-    /// similar to other text APIs.
+    /// Gemini Enterprise Agent Platform only. Whether to silently truncate inputs longer than the
+    /// max sequence length. If this option is set to false, oversized inputs will lead to an
+    /// INVALID_ARGUMENT error, similar to other text APIs.
     /// </summary>
     [JsonPropertyName("autoTruncate")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -89,8 +89,8 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
-    /// Vertex API only. Whether to enable OCR for document content. Only applicable to Gemini
-    /// Embedding 2 models.
+    /// Gemini Enterprise Agent Platform only. Whether to enable OCR for document content. Only
+    /// applicable to Gemini Embedding 2 models.
     /// </summary>
     [JsonPropertyName("documentOcr")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -100,8 +100,8 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
-    /// Vertex API only. Whether to extract audio from video content. Only applicable to Gemini
-    /// Embedding 2 models.
+    /// Gemini Enterprise Agent Platform only. Whether to extract audio from video content. Only
+    /// applicable to Gemini Embedding 2 models.
     /// </summary>
     [JsonPropertyName("audioTrackExtraction")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

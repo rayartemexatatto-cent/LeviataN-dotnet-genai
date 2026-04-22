@@ -118,6 +118,6 @@ public class ListTuningsTest
             await geminiClient.Tunings.ListAsync(new ListTuningJobsConfig { PageSize = 1 });
         });
 
-        StringAssert.Contains(ex.Message, "only supported in the Vertex AI client");
+        StringAssert.Contains(ex.Message, "only supported in the Gemini Enterprise Agent Platform");
     }
 }

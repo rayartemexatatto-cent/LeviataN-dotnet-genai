@@ -136,7 +136,7 @@ public class EditImageErrorHandlingTest {
         config: editImageConfig);
     });
 
-    StringAssert.Contains(ex.Message, "only supported in the Vertex AI client");
+    StringAssert.Contains(ex.Message, "only supported in the Gemini Enterprise Agent Platform");
   }
 
   [TestMethod]

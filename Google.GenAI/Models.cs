@@ -1139,7 +1139,8 @@ namespace Google.GenAI {
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "behavior" }))) {
-        throw new NotSupportedException("behavior parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "behavior parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       return toObject;
@@ -1515,7 +1516,7 @@ namespace Google.GenAI {
       if (!Common.IsZero(
               Common.GetValueByPath(fromObject, new string[] { "enableEnhancedCivicAnswers" }))) {
         throw new NotSupportedException(
-            "enableEnhancedCivicAnswers parameter is not supported in Vertex AI.");
+            "enableEnhancedCivicAnswers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (Common.GetValueByPath(fromObject, new string[] { "modelArmorConfig" }) != null) {
@@ -2215,7 +2216,8 @@ namespace Google.GenAI {
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "webhookConfig" }))) {
-        throw new NotSupportedException("webhookConfig parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "webhookConfig parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       return toObject;
@@ -2734,7 +2736,7 @@ namespace Google.GenAI {
       if (!Common.IsZero(
               Common.GetValueByPath(fromObject, new string[] { "enableEnhancedCivicAnswers" }))) {
         throw new NotSupportedException(
-            "enableEnhancedCivicAnswers parameter is not supported in Vertex AI.");
+            "enableEnhancedCivicAnswers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       return toObject;
@@ -3445,15 +3447,18 @@ namespace Google.GenAI {
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "toolCall" }))) {
-        throw new NotSupportedException("toolCall parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "toolCall parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "toolResponse" }))) {
-        throw new NotSupportedException("toolResponse parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "toolResponse parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "partMetadata" }))) {
-        throw new NotSupportedException("partMetadata parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "partMetadata parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       return toObject;
@@ -3913,7 +3918,7 @@ namespace Google.GenAI {
       if (!Common.IsZero(Common.GetValueByPath(
               fromObject, new string[] { "includeServerSideToolInvocations" }))) {
         throw new NotSupportedException(
-            "includeServerSideToolInvocations parameter is not supported in Vertex AI.");
+            "includeServerSideToolInvocations parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       return toObject;
@@ -4007,7 +4012,8 @@ namespace Google.GenAI {
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "fileSearch" }))) {
-        throw new NotSupportedException("fileSearch parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "fileSearch parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (Common.GetValueByPath(fromObject, new string[] { "googleSearch" }) != null) {
@@ -4061,7 +4067,8 @@ namespace Google.GenAI {
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "mcpServers" }))) {
-        throw new NotSupportedException("mcpServers parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "mcpServers parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       return toObject;
@@ -4795,7 +4802,8 @@ namespace Google.GenAI {
                                            parameterNode);
         path = Common.FormatMap("{model}:predict", body["_url"]);
       } else {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
       JsonObject? bodyObj = body?.AsObject();
       bodyObj?.Remove("_url");
@@ -4828,7 +4836,8 @@ namespace Google.GenAI {
       }
 
       if (!this._apiClient.VertexAI) {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
 
       return responseNode.Deserialize<EditImageResponse>() ??
@@ -4865,7 +4874,8 @@ namespace Google.GenAI {
                                                  parameterNode);
         path = Common.FormatMap("{model}:predict", body["_url"]);
       } else {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
       JsonObject? bodyObj = body?.AsObject();
       bodyObj?.Remove("_url");
@@ -4898,7 +4908,8 @@ namespace Google.GenAI {
       }
 
       if (!this._apiClient.VertexAI) {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
 
       return responseNode.Deserialize<UpscaleImageResponse>() ??
@@ -4933,7 +4944,8 @@ namespace Google.GenAI {
                                                 parameterNode);
         path = Common.FormatMap("{model}:predict", body["_url"]);
       } else {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
       JsonObject? bodyObj = body?.AsObject();
       bodyObj?.Remove("_url");
@@ -4966,7 +4978,8 @@ namespace Google.GenAI {
       }
 
       if (!this._apiClient.VertexAI) {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
 
       return responseNode.Deserialize<RecontextImageResponse>() ??
@@ -5001,7 +5014,8 @@ namespace Google.GenAI {
                                               parameterNode);
         path = Common.FormatMap("{model}:predict", body["_url"]);
       } else {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
       JsonObject? bodyObj = body?.AsObject();
       bodyObj?.Remove("_url");
@@ -5034,7 +5048,8 @@ namespace Google.GenAI {
       }
 
       if (!this._apiClient.VertexAI) {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
 
       return responseNode.Deserialize<SegmentImageResponse>() ??
@@ -5413,7 +5428,7 @@ namespace Google.GenAI {
     /// cref="Task{ComputeTokensResponse}"/> that represents the asynchronous operation. The task
     /// result contains a <see cref="ComputeTokensResponse"/> instance with token
     /// information.</returns> <exception cref="NotSupportedException">Thrown when called with a
-    /// non-Vertex AI client.</exception>
+    /// non-Gemini Enterprise Agent Platform (previously known as Vertex AI) client.</exception>
 
     public async Task<ComputeTokensResponse> ComputeTokensAsync(
         string model, List<Content> contents, ComputeTokensConfig? config = null,
@@ -5442,7 +5457,8 @@ namespace Google.GenAI {
                                                parameterNode);
         path = Common.FormatMap("{model}:computeTokens", body["_url"]);
       } else {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
       JsonObject? bodyObj = body?.AsObject();
       bodyObj?.Remove("_url");
@@ -5475,7 +5491,8 @@ namespace Google.GenAI {
       }
 
       if (!this._apiClient.VertexAI) {
-        throw new NotSupportedException("This method is only supported in the Vertex AI client.");
+        throw new NotSupportedException(
+            "This method is only supported in the Gemini Enterprise Agent Platform (previously known as Vertex AI) client.");
       }
 
       return responseNode.Deserialize<ComputeTokensResponse>() ??
@@ -5764,7 +5781,7 @@ namespace Google.GenAI {
         if (!config.QueryBase.Value) {
           if (!String.IsNullOrEmpty(config.Filter)) {
             throw new NotSupportedException(
-                "Filtering tuned models list for Vertex AI is not currently supported");
+                "Filtering tuned models list for Gemini Enterprise Agent Platform (previously known as Vertex AI) is not currently supported");
           }
         }
       }
@@ -5829,7 +5846,7 @@ namespace Google.GenAI {
     /// cref="Task{ComputeTokensResponse}"/> that represents the asynchronous operation. The task
     /// result contains a <see cref="ComputeTokensResponse"/> instance with token
     /// information.</returns> <exception cref="NotSupportedException">Thrown when called with a
-    /// non-Vertex AI client.</exception>
+    /// non-Gemini Enterprise Agent Platform (previously known as Vertex AI) client.</exception>
     public async Task<ComputeTokensResponse> ComputeTokensAsync(
         String model, Content contents, ComputeTokensConfig? config = null,
         CancellationToken cancellationToken = default) {
@@ -5848,7 +5865,7 @@ namespace Google.GenAI {
     /// cref="Task{ComputeTokensResponse}"/> that represents the asynchronous operation. The task
     /// result contains a <see cref="ComputeTokensResponse"/> instance with token
     /// information.</returns> <exception cref="NotSupportedException">Thrown when called with a
-    /// non-Vertex AI client.</exception>
+    /// non-Gemini Enterprise Agent Platform (previously known as Vertex AI) client.</exception>
     public async Task<ComputeTokensResponse> ComputeTokensAsync(
         String model, String contents, ComputeTokensConfig? config = null,
         CancellationToken cancellationToken = default) {

@@ -158,18 +158,19 @@ namespace Google.GenAI {
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "fileName" }))) {
-        throw new NotSupportedException("fileName parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "fileName parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "inlinedResponses" }))) {
         throw new NotSupportedException(
-            "inlinedResponses parameter is not supported in Vertex AI.");
+            "inlinedResponses parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (!Common.IsZero(
               Common.GetValueByPath(fromObject, new string[] { "inlinedEmbedContentResponses" }))) {
         throw new NotSupportedException(
-            "inlinedEmbedContentResponses parameter is not supported in Vertex AI.");
+            "inlinedEmbedContentResponses parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (Common.GetValueByPath(fromObject, new string[] { "vertexDataset" }) != null) {
@@ -406,11 +407,13 @@ namespace Google.GenAI {
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "fileName" }))) {
-        throw new NotSupportedException("fileName parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "fileName parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "inlinedRequests" }))) {
-        throw new NotSupportedException("inlinedRequests parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "inlinedRequests parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       if (Common.GetValueByPath(fromObject, new string[] { "vertexDatasetName" }) != null) {
@@ -601,7 +604,8 @@ namespace Google.GenAI {
       }
 
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "webhookConfig" }))) {
-        throw new NotSupportedException("webhookConfig parameter is not supported in Vertex AI.");
+        throw new NotSupportedException(
+            "webhookConfig parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
       }
 
       return toObject;
@@ -1879,10 +1883,10 @@ namespace Google.GenAI {
     /// <param name="name">A fully-qualified BatchJob resource name or ID.
     /// Example: "projects/.../locations/.../batchPredictionJobs/456"
     /// or "456" when project and location are initialized in the
-    /// Vertex AI client. Or "batches/abc" using the Gemini Developer AI client.</param>
-    /// <param name="config">A <see cref="GetBatchJobConfig"/> for configuring the get
-    /// request.</param> <param name="cancellationToken">The <see cref="CancellationToken"/> for the
-    /// request.</param> <returns>A <see cref="BatchJob"/> object that contains the info of the
+    /// Gemini Enterprise Agent Platform client. Or "batches/abc" using the Gemini Developer AI
+    /// client.</param> <param name="config">A <see cref="GetBatchJobConfig"/> for configuring the
+    /// get request.</param> <param name="cancellationToken">The <see cref="CancellationToken"/> for
+    /// the request.</param> <returns>A <see cref="BatchJob"/> object that contains the info of the
     /// batch job.</returns>
 
     public async Task<BatchJob> GetAsync(string name, GetBatchJobConfig? config = null,
@@ -2086,11 +2090,11 @@ namespace Google.GenAI {
     /// <param name="name">A fully-qualified BatchJob resource name or ID.
     /// Example: "projects/.../locations/.../batchPredictionJobs/456"
     /// or "456" when project and location are initialized in the
-    /// Vertex AI client. Or "batches/abc" using the Gemini Developer AI client.</param>
-    /// <param name="config">A <see cref="DeleteBatchJobConfig"/> for configuring the delete
-    /// request.</param> <param name="cancellationToken">The <see cref="CancellationToken"/> for the
-    /// request.</param> <returns>A <see cref="DeleteResourceJob"/> object that shows the status of
-    /// the deletion.</returns>
+    /// Gemini Enterprise Agent Platform client. Or "batches/abc" using the Gemini Developer AI
+    /// client.</param> <param name="config">A <see cref="DeleteBatchJobConfig"/> for configuring
+    /// the delete request.</param> <param name="cancellationToken">The <see
+    /// cref="CancellationToken"/> for the request.</param> <returns>A <see
+    /// cref="DeleteResourceJob"/> object that shows the status of the deletion.</returns>
 
     public async Task<DeleteResourceJob> DeleteAsync(
         string name, DeleteBatchJobConfig? config = null,
@@ -2186,9 +2190,9 @@ namespace Google.GenAI {
     /// </summary>
     /// <param name="model">The model to use for the batch job.</param>
     /// <param name="src">The <see cref="BatchJobSource"/> of the batch job.
-    /// Currently Vertex AI supports GCS URIs or BigQuery URI. Example: "gs://path/to/input/data" or
-    /// "bq://projectId.bqDatasetId.bqTableId". Gemini Developer API supports List of
-    /// inlined_request, or file name. Example: "files/file_name".</param> <param
+    /// Currently Gemini Enterprise Agent Platform supports GCS URIs or BigQuery URI. Example:
+    /// "gs://path/to/input/data" or "bq://projectId.bqDatasetId.bqTableId". Gemini Developer API
+    /// supports List of inlined_request, or file name. Example: "files/file_name".</param> <param
     /// name="config">Optional <see cref="CreateBatchJobConfig"/> to configure the batch
     /// job.</param> <param name="cancellationToken">The cancellation token for the request.</param>
     /// <returns>A <see cref="Task{BatchJob}"/> that represents the asynchronous operation. The task
@@ -2198,10 +2202,12 @@ namespace Google.GenAI {
                                             CancellationToken cancellationToken = default) {
       if (this._apiClient.VertexAI) {
         if (src.InlinedRequests != null) {
-          throw new NotSupportedException("inlinedRequests is not supported for Vertex AI.");
+          throw new NotSupportedException(
+              "inlinedRequests is not supported for Gemini Enterprise Agent Platform (previously known as Vertex AI).");
         }
         if (src.FileName != null) {
-          throw new NotSupportedException("fileName is not supported for Vertex AI.");
+          throw new NotSupportedException(
+              "fileName is not supported for Gemini Enterprise Agent Platform (previously known as Vertex AI).");
         }
         if (src.GcsUri != null && src.BigqueryUri != null) {
           throw new ArgumentException("Only one of gcsUri and bigqueryUri can be set.");
@@ -2235,7 +2241,8 @@ namespace Google.GenAI {
         string model, EmbeddingsBatchJobSource src, CreateEmbeddingsBatchJobConfig config,
         CancellationToken cancellationToken = default) {
       if (this._apiClient.VertexAI) {
-        throw new NotSupportedException("Vertex AI does not support batches.createEmbeddings.");
+        throw new NotSupportedException(
+            "Gemini Enterprise Agent Platform (previously known as Vertex AI) does not support batches.createEmbeddings.");
       }
       return await this.PrivateCreateEmbeddingsAsync(model, src, config, cancellationToken);
     }

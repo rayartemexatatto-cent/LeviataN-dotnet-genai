@@ -76,6 +76,7 @@ namespace Google.GenAI
     /// Constructs an ApiClient.
     /// </summary>
     protected ApiClient(
+        bool? enterprise = null,
         bool? vertexAI = null,
         string? apiKey = null,
         string? project = null,
@@ -84,15 +85,42 @@ namespace Google.GenAI
         HttpOptions? customHttpOptions = null,
         Google.GenAI.Types.ClientOptions? clientOptions = null)
     {
-      if (vertexAI.HasValue)
+      if (enterprise.HasValue && vertexAI.HasValue && enterprise.Value != vertexAI.Value)
       {
-        this.VertexAI = vertexAI.Value;
+        throw new ArgumentException("enterprise and vertexAI flags have conflicting values, please set enterprise value only.");
       }
-      else
+
+      bool? resolvedCloudFlag = null;
+
+      if (enterprise.HasValue)
       {
-        string? vertexAIEnv = System.Environment.GetEnvironmentVariable("GOOGLE_GENAI_USE_VERTEXAI");
-        this.VertexAI = vertexAIEnv != null && vertexAIEnv.ToLower() == "true";
+        resolvedCloudFlag = enterprise.Value;
       }
+
+      if (!resolvedCloudFlag.HasValue && vertexAI.HasValue)
+      {
+        resolvedCloudFlag = vertexAI.Value;
+      }
+
+      string? enterpriseEnv = System.Environment.GetEnvironmentVariable("GOOGLE_GENAI_USE_ENTERPRISE");
+      string? vertexAIEnv = System.Environment.GetEnvironmentVariable("GOOGLE_GENAI_USE_VERTEXAI");
+
+      if (!resolvedCloudFlag.HasValue && enterpriseEnv != null && vertexAIEnv != null)
+      {
+        System.Diagnostics.Trace.TraceWarning("Warning: Both GOOGLE_GENAI_USE_ENTERPRISE and GOOGLE_GENAI_USE_VERTEXAI are set. The value of GOOGLE_GENAI_USE_ENTERPRISE will be used.");
+      }
+
+      if (!resolvedCloudFlag.HasValue && enterpriseEnv != null)
+      {
+        resolvedCloudFlag = enterpriseEnv.ToLower() == "true";
+      }
+
+      if (!resolvedCloudFlag.HasValue && vertexAIEnv != null)
+      {
+        resolvedCloudFlag = vertexAIEnv.ToLower() == "true";
+      }
+
+      this.VertexAI = resolvedCloudFlag ?? false;
 
       var envProject = System.Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT");
       var envLocation = System.Environment.GetEnvironmentVariable("GOOGLE_CLOUD_LOCATION");
@@ -401,9 +429,9 @@ namespace Google.GenAI
     /// <returns>A <see cref="ValueTask"/> that represents the asynchronous dispose operation.</returns>
     public virtual ValueTask DisposeAsync()
     {
-        Dispose();
+      Dispose();
 #if NETSTANDARD2_0_OR_GREATER
-        return new ValueTask(Task.CompletedTask);
+      return new ValueTask(Task.CompletedTask);
 #else
         return ValueTask.CompletedTask;
 #endif
@@ -411,14 +439,14 @@ namespace Google.GenAI
 
     private static string GetSdkVersion()
     {
-        // This reads AssemblyInformationalVersionAttribute from the assembly,
-        // which is generated during build from the <Version> property.
-        // Google.GenAI.csproj imports ReleaseVersion.xml to set <Version>,
-        // so this effectively reads the version from ReleaseVersion.xml.
-        return typeof(ApiClient)
-            .Assembly
-            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-            ?.InformationalVersion ?? "";
+      // This reads AssemblyInformationalVersionAttribute from the assembly,
+      // which is generated during build from the <Version> property.
+      // Google.GenAI.csproj imports ReleaseVersion.xml to set <Version>,
+      // so this effectively reads the version from ReleaseVersion.xml.
+      return typeof(ApiClient)
+          .Assembly
+          .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+          ?.InformationalVersion ?? "";
     }
   }
 }

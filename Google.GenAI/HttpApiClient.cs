@@ -85,6 +85,7 @@ namespace Google.GenAI
   public class HttpApiClient : ApiClient
   {
     public HttpApiClient(
+        bool? enterprise = null,
         bool? vertexAI = null,
         string? apiKey = null,
         string? project = null,
@@ -92,7 +93,7 @@ namespace Google.GenAI
         ICredential? credentials = null,
         Types.HttpOptions? httpOptions = null,
         Types.ClientOptions? clientOptions = null
-    ) : base(vertexAI, apiKey, project, location, credentials, httpOptions, clientOptions) { }
+    ) : base(enterprise, vertexAI, apiKey, project, location, credentials, httpOptions, clientOptions) { }
 
     public override async Task<ApiResponse> RequestAsync(
         HttpMethod httpMethod,

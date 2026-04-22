@@ -30,7 +30,7 @@ using TestServerSdk;
 [TestClass]
 public class GenerateContentSimpleTestCustomClient {
   private static TestServerProcess? _server;
-  private Client vertexClient;
+  private Client enterpriseClient;
   private Client geminiClient;
   private string modelName;
   public TestContext TestContext { get; set; }
@@ -56,7 +56,7 @@ public class GenerateContentSimpleTestCustomClient {
                                                    $"{GetType().Name}.{TestContext.TestName}" } },
       BaseUrl = "http://localhost:1453"
     };
-    var vertexClientHttpOptions = new HttpOptions {
+    var enterpriseClientHttpOptions = new HttpOptions {
       Headers = new Dictionary<string, string> { { "Test-Name",
                                                    $"{GetType().Name}.{TestContext.TestName}" } },
       BaseUrl = "http://localhost:1454"
@@ -67,16 +67,16 @@ public class GenerateContentSimpleTestCustomClient {
     string location =
         System.Environment.GetEnvironmentVariable("GOOGLE_CLOUD_LOCATION") ?? "us-central1";
     string apiKey = System.Environment.GetEnvironmentVariable("GOOGLE_API_KEY");
-    vertexClient = new Client(project: project, location: location, vertexAI: true,
+    enterpriseClient = new Client(project: project, location: location, enterprise: true,
                               credential: TestServer.GetCredentialForTestMode(),
-                              httpOptions: vertexClientHttpOptions,
+                              httpOptions: enterpriseClientHttpOptions,
                               clientOptions: new ClientOptions {
                                 HttpClientFactory = () => new HttpClient(new HttpClientHandler()) {
                                   Timeout = TimeSpan.FromMinutes(5)
                                 }
                               });
     geminiClient =
-        new Client(apiKey: apiKey, vertexAI: false, httpOptions: geminiClientHttpOptions, 
+        new Client(apiKey: apiKey, enterprise: false, httpOptions: geminiClientHttpOptions, 
                    clientOptions: new ClientOptions {
                     HttpClientFactory = () => new HttpClient(new HttpClientHandler()) {
                       Timeout = TimeSpan.FromMinutes(5)
@@ -89,7 +89,7 @@ public class GenerateContentSimpleTestCustomClient {
 
   [TestMethod]
   public async Task GenerateContentSimpleTextVertexTest() {
-    var vertexResponse = await vertexClient.Models.GenerateContentAsync(
+    var vertexResponse = await enterpriseClient.Models.GenerateContentAsync(
         model: modelName, contents: "What is the capital of France?");
 
     Assert.IsNotNull(vertexResponse.Candidates);

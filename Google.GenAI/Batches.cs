@@ -312,6 +312,11 @@ namespace Google.GenAI {
             Common.GetValueByPath(fromObject, new string[] { "completionStats" }));
       }
 
+      if (Common.GetValueByPath(fromObject, new string[] { "outputInfo" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "outputInfo" },
+                              Common.GetValueByPath(fromObject, new string[] { "outputInfo" }));
+      }
+
       return toObject;
     }
 

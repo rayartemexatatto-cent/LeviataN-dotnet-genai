@@ -147,6 +147,16 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
+    /// Information further describing the output of this job. Output only.
+    /// </summary>
+    [JsonPropertyName("outputInfo")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public BatchJobOutputInfo
+        ? OutputInfo {
+            get; set;
+          }
+
+    /// <summary>
     /// Deserializes a JSON string to a BatchJob object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>

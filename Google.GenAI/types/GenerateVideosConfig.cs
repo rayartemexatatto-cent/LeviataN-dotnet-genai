@@ -224,6 +224,16 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
+    /// Resize mode of the image input for video generation.
+    /// </summary>
+    [JsonPropertyName("resizeMode")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public ImageResizeMode
+        ? ResizeMode {
+            get; set;
+          }
+
+    /// <summary>
     /// Deserializes a JSON string to a GenerateVideosConfig object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>

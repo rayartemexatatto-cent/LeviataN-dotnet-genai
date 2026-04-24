@@ -2107,6 +2107,10 @@ namespace Google.GenAI {
                               Common.GetValueByPath(fromObject, new string[] { "webhookConfig" }));
       }
 
+      if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "resizeMode" }))) {
+        throw new NotSupportedException("resizeMode parameter is not supported in Gemini API.");
+      }
+
       return toObject;
     }
 
@@ -2218,6 +2222,11 @@ namespace Google.GenAI {
       if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "webhookConfig" }))) {
         throw new NotSupportedException(
             "webhookConfig parameter is not supported in Gemini Enterprise Agent Platform (previously known as Vertex AI).");
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "resizeMode" }) != null) {
+        Common.SetValueByPath(parentObject, new string[] { "parameters", "resizeMode" },
+                              Common.GetValueByPath(fromObject, new string[] { "resizeMode" }));
       }
 
       return toObject;

@@ -34,6 +34,7 @@ namespace Google.GenAI
     public Batches Batches { get; }
     public Operations Operations { get; }
     public Files Files { get; }
+    public Tokens Tokens { get; }
 
     private int _disposed = 0;
 
@@ -128,6 +129,7 @@ namespace Google.GenAI
       Batches = new Batches(_apiClient);
       Operations = new Operations(_apiClient);
       Files = new Files(_apiClient);
+      Tokens = new Tokens(_apiClient);
     }
 
     static string? inferBaseUrl(bool vertexAI)

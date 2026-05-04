@@ -113,6 +113,16 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
+    /// Optional. Media ID. This field is not supported in Vertex AI.
+    /// </summary>
+    [JsonPropertyName("mediaId")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string
+        ? MediaId {
+            get; set;
+          }
+
+    /// <summary>
     /// Deserializes a JSON string to a GroundingChunkRetrievedContext object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>

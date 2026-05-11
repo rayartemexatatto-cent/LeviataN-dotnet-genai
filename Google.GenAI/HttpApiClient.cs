@@ -300,7 +300,7 @@ namespace Google.GenAI
       response.EnsureSuccessStatusCode();
     }
 
-    private static readonly Regex ResponseLineRegex = new Regex(@"^data: (.*?)(?:\r\n\r\n|\n\n|\r\r)", RegexOptions.Singleline | RegexOptions.Compiled);
+    private static readonly Regex ResponseLineRegex = new Regex(@"^data: ?(.*?)(?:\r\n\r\n|\n\n|\r\r)", RegexOptions.Singleline | RegexOptions.Compiled);
 
     private async IAsyncEnumerable<string> ProcessStreamResponse(Stream stream,
         [EnumeratorCancellation] CancellationToken cancellationToken = default)
@@ -336,6 +336,7 @@ namespace Google.GenAI
           while (match.Success)
           {
             string processedChunkString = match.Groups[1].Value;
+            processedChunkString = Regex.Replace(processedChunkString, @"\r?\ndata: ?", "\n");
 
             string? validatedChunk = ValidateChunk(processedChunkString);
             if (validatedChunk != null)

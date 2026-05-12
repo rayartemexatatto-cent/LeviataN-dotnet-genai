@@ -90,7 +90,7 @@ public class SegmentImageTest {
         config: segmentImageConfig);
     });
 
-    StringAssert.Contains(ex.Message, "only supported in the Gemini Enterprise Agent Platform");
+    StringAssert.Contains(ex.Message, "only supported in Gemini Enterprise Agent Platform mode");
   }
 
   [TestMethod]

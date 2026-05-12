@@ -134,7 +134,7 @@ public class GenerateContentErrorHandlingTest {
           } });
     });
 
-    Assert.AreEqual(ex.Message, "enterpriseWebSearch parameter is not supported in Gemini API.");
+    StringAssert.Contains(ex.Message, "only supported in Gemini Enterprise Agent Platform mode");
   }
 
   [TestMethod]
@@ -160,6 +160,6 @@ public class GenerateContentErrorHandlingTest {
           });
     });
 
-    Assert.AreEqual(ex.Message, "labels parameter is not supported in Gemini API.");
+    StringAssert.Contains(ex.Message, "only supported in Gemini Enterprise Agent Platform mode,");
   }
 }

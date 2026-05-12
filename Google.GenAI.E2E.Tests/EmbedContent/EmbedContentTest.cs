@@ -160,7 +160,7 @@ public class EmbedContentTest {
       var exception = await Assert.ThrowsExceptionAsync<NotSupportedException>(
           () => geminiClient.Models.EmbedContentAsync(model: modelName, contents: contents, config: config));
 
-      Assert.IsTrue(exception.Message.Contains("mimeType parameter is not supported"));
+      StringAssert.Contains(exception.Message, "is only supported in");
   }
 
   [TestMethod]
@@ -177,7 +177,7 @@ public class EmbedContentTest {
       var exception = await Assert.ThrowsExceptionAsync<NotSupportedException>(
           () => geminiClient.Models.EmbedContentAsync(model: modelName, contents: contents, config: config));
 
-      Assert.IsTrue(exception.Message.Contains("autoTruncate parameter is not supported"));
+      StringAssert.Contains(exception.Message, "is only supported in");
   }
 
   [TestMethod]
@@ -221,7 +221,7 @@ public class EmbedContentTest {
       var exception = await Assert.ThrowsExceptionAsync<NotSupportedException>(
           () => geminiClient.Models.EmbedContentAsync(model: multimodalModelName, contents: contents, config: config));
 
-      Assert.IsTrue(exception.Message.Contains("autoTruncate parameter is not supported"));
+      StringAssert.Contains(exception.Message, "is only supported in");
   }
 
     [TestMethod]

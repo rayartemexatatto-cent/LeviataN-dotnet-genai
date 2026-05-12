@@ -135,6 +135,6 @@ public class GenerateImagesErrorHandlingTest {
                                                     });
     });
 
-    Assert.AreEqual(ex.Message, "seed parameter is not supported in Gemini API.");
+    StringAssert.Contains(ex.Message, "is only supported in Gemini Enterprise Agent Platform mode");
   }
 }

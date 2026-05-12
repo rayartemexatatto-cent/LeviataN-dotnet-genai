@@ -583,7 +583,7 @@ public class GenerateVideosTest {
           model: "veo-2.0-generate-exp", source: source, config: config);
     });
 
-    Assert.AreEqual(ex.Message, "mask parameter is not supported in Gemini API.");
+    StringAssert.Contains(ex.Message, "parameter is only supported in Gemini Enterprise Agent Platform mode");
   }
 
 }

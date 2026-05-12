@@ -367,7 +367,8 @@ public class UpscaleImageSimple {
 
 Edit image uses a separate model from generate and upscale.
 
-Edit image is only supported in the Gemini Enterprise Agent Platform.
+Edit image is only supported in Gemini Enterprise Agent Platform mode, not in
+Gemini Developer API mode.
 
 ```csharp
 using Google.GenAI;

@@ -933,6 +933,12 @@ namespace Google.GenAI {
         Common.SetValueByPath(parentObject, new string[] { "setup", "safetySettings" }, result);
       }
 
+      if (Common.GetValueByPath(fromObject, new string[] { "streamTranslationConfig" }) != null) {
+        Common.SetValueByPath(
+            parentObject, new string[] { "setup", "generationConfig", "streamTranslationConfig" },
+            Common.GetValueByPath(fromObject, new string[] { "streamTranslationConfig" }));
+      }
+
       return toObject;
     }
 
@@ -1073,6 +1079,12 @@ namespace Google.GenAI {
       if (Common.GetValueByPath(fromObject, new string[] { "safetySettings" }) != null) {
         Common.SetValueByPath(parentObject, new string[] { "setup", "safetySettings" },
                               Common.GetValueByPath(fromObject, new string[] { "safetySettings" }));
+      }
+
+      if (!Common.IsZero(
+              Common.GetValueByPath(fromObject, new string[] { "streamTranslationConfig" }))) {
+        throw new NotSupportedException(
+            "streamTranslationConfig parameter is only supported in Gemini Developer API mode, not in Gemini Enterprise Agent Platform mode.");
       }
 
       return toObject;

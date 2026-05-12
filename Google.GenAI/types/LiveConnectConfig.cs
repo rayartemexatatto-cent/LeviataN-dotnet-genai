@@ -273,6 +273,16 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
+    /// Config for stream translation.
+    /// </summary>
+    [JsonPropertyName("streamTranslationConfig")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public StreamTranslationConfig
+        ? StreamTranslationConfig {
+            get; set;
+          }
+
+    /// <summary>
     /// Deserializes a JSON string to a LiveConnectConfig object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>

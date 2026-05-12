@@ -440,6 +440,12 @@ namespace Google.GenAI {
         Common.SetValueByPath(parentObject, new string[] { "setup", "safetySettings" }, result);
       }
 
+      if (Common.GetValueByPath(fromObject, new string[] { "streamTranslationConfig" }) != null) {
+        Common.SetValueByPath(
+            parentObject, new string[] { "setup", "generationConfig", "streamTranslationConfig" },
+            Common.GetValueByPath(fromObject, new string[] { "streamTranslationConfig" }));
+      }
+
       return toObject;
     }
 

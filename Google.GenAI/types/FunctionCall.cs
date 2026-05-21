@@ -37,7 +37,7 @@ namespace Google.GenAI.Types {
 
     /// <summary>
     /// Optional. The function parameters and values in JSON object format. See
-    /// [FunctionDeclaration.parameters] for parameter details.
+    /// FunctionDeclaration.parameters for parameter details.
     /// </summary>
     [JsonPropertyName("args")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -47,7 +47,7 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
-    /// Optional. The name of the function to call. Matches [FunctionDeclaration.name].
+    /// Optional. The name of the function to call. Matches FunctionDeclaration.name.
     /// </summary>
     [JsonPropertyName("name")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

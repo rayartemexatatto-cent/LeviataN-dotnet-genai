@@ -23,32 +23,31 @@ using Google.GenAI.Serialization;
 
 namespace Google.GenAI.Types {
   /// <summary>
-  /// Distillation sampling spec for tuning.
+  /// Tuning Spec for Veo LoRA Model Tuning. This data type is not supported in Gemini API.
   /// </summary>
 
-  public record DistillationSamplingSpec {
+  public record VeoLoraTuningSpec {
     /// <summary>
-    /// The base teacher model that is being distilled. See Supported models
-    /// (https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/tuning#supported_models).
+    /// Optional. Hyperparameters for Veo LoRA.
     /// </summary>
-    [JsonPropertyName("baseTeacherModel")]
+    [JsonPropertyName("hyperParameters")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string ? BaseTeacherModel { get; set; }
+    public VeoHyperParameters ? HyperParameters { get; set; }
 
     /// <summary>
-    /// The resource name of the Tuned teacher model. Format:
-    /// `projects/{project}/locations/{location}/models/{model}`.
+    /// Training dataset used for tuning. The dataset can be specified as either a Cloud Storage
+    /// path to a JSONL file or as the resource name of a Vertex Multimodal Dataset.
     /// </summary>
-    [JsonPropertyName("tunedTeacherModelSource")]
+    [JsonPropertyName("trainingDatasetUri")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string
-        ? TunedTeacherModelSource {
+        ? TrainingDatasetUri {
             get; set;
           }
 
     /// <summary>
-    /// Cloud Storage path to file containing validation dataset for distillation. The dataset must
-    /// be formatted as a JSONL file.
+    /// Optional. Validation dataset used for tuning. The dataset can be specified as either a Cloud
+    /// Storage path to a JSONL file or as the resource name of a Vertex Multimodal Dataset.
     /// </summary>
     [JsonPropertyName("validationDatasetUri")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -58,37 +57,26 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
-    /// Cloud Storage path to file containing prompt dataset for distillation. The dataset must be
-    /// formatted as a JSONL file.
+    /// Optional. The orientation of the video. Defaults to LANDSCAPE.
     /// </summary>
-    [JsonPropertyName("promptDatasetUri")]
+    [JsonPropertyName("videoOrientation")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string
-        ? PromptDatasetUri {
+    public VideoOrientation
+        ? VideoOrientation {
             get; set;
           }
 
     /// <summary>
-    /// Hyperparameters for distillation tuning.
-    /// </summary>
-    [JsonPropertyName("hyperparameters")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public DistillationHyperParameters
-        ? Hyperparameters {
-            get; set;
-          }
-
-    /// <summary>
-    /// Deserializes a JSON string to a DistillationSamplingSpec object.
+    /// Deserializes a JSON string to a VeoLoraTuningSpec object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>
     /// <param name="options">Optional JsonSerializerOptions.</param>
-    /// <returns>The deserialized DistillationSamplingSpec object, or null if deserialization
+    /// <returns>The deserialized VeoLoraTuningSpec object, or null if deserialization
     /// fails.</returns>
-    public static DistillationSamplingSpec
+    public static VeoLoraTuningSpec
         ? FromJson(string jsonString, JsonSerializerOptions? options = null) {
       try {
-        return JsonSerializer.Deserialize<DistillationSamplingSpec>(jsonString, options);
+        return JsonSerializer.Deserialize<VeoLoraTuningSpec>(jsonString, options);
       } catch (JsonException e) {
         Console.Error.WriteLine($"Error deserializing JSON: {e.ToString()}");
         return null;

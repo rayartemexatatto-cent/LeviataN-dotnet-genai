@@ -103,7 +103,8 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
-    /// Optional. Page number of the retrieved context. This field is not supported in Vertex AI.
+    /// Optional. Page number of the retrieved context, if applicable. This field is not supported
+    /// in Vertex AI.
     /// </summary>
     [JsonPropertyName("pageNumber")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -113,7 +114,9 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
-    /// Optional. Media ID. This field is not supported in Vertex AI.
+    /// Optional. The media blob resource name for multimodal file search results. Format:
+    /// fileSearchStores/{file_search_store_id}/media/{blob_id}. This field is not supported in
+    /// Vertex AI.
     /// </summary>
     [JsonPropertyName("mediaId")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

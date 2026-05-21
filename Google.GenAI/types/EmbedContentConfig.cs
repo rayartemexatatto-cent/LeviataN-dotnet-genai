@@ -28,21 +28,11 @@ namespace Google.GenAI.Types {
 
   public record EmbedContentConfig {
     /// <summary>
-    /// Used to override HTTP request options.
-    /// </summary>
-    [JsonPropertyName("httpOptions")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public HttpOptions ? HttpOptions { get; set; }
-
-    /// <summary>
     /// Type of task for which the embedding will be used.
     /// </summary>
     [JsonPropertyName("taskType")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string
-        ? TaskType {
-            get; set;
-          }
+    public string ? TaskType { get; set; }
 
     /// <summary>
     /// Title for the text. Only applicable when TaskType is `RETRIEVAL_DOCUMENT`.
@@ -107,6 +97,16 @@ namespace Google.GenAI.Types {
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool
         ? AudioTrackExtraction {
+            get; set;
+          }
+
+    /// <summary>
+    /// Used to override HTTP request options.
+    /// </summary>
+    [JsonPropertyName("httpOptions")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public HttpOptions
+        ? HttpOptions {
             get; set;
           }
 

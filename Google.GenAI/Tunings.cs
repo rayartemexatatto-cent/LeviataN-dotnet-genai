@@ -189,6 +189,38 @@ namespace Google.GenAI {
             "encryptionSpec parameter is only supported in Gemini Enterprise Agent Platform mode, not in Gemini Developer API mode.");
       }
 
+      if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "rewardConfig" }))) {
+        throw new NotSupportedException(
+            "rewardConfig parameter is only supported in Gemini Enterprise Agent Platform mode, not in Gemini Developer API mode.");
+      }
+
+      if (!Common.IsZero(
+              Common.GetValueByPath(fromObject, new string[] { "compositeRewardConfig" }))) {
+        throw new NotSupportedException(
+            "compositeRewardConfig parameter is only supported in Gemini Enterprise Agent Platform mode, not in Gemini Developer API mode.");
+      }
+
+      if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "samplesPerPrompt" }))) {
+        throw new NotSupportedException(
+            "samplesPerPrompt parameter is only supported in Gemini Enterprise Agent Platform mode, not in Gemini Developer API mode.");
+      }
+
+      if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "evaluateInterval" }))) {
+        throw new NotSupportedException(
+            "evaluateInterval parameter is only supported in Gemini Enterprise Agent Platform mode, not in Gemini Developer API mode.");
+      }
+
+      if (!Common.IsZero(
+              Common.GetValueByPath(fromObject, new string[] { "checkpointInterval" }))) {
+        throw new NotSupportedException(
+            "checkpointInterval parameter is only supported in Gemini Enterprise Agent Platform mode, not in Gemini Developer API mode.");
+      }
+
+      if (!Common.IsZero(Common.GetValueByPath(fromObject, new string[] { "maxOutputTokens" }))) {
+        throw new NotSupportedException(
+            "maxOutputTokens parameter is only supported in Gemini Enterprise Agent Platform mode, not in Gemini Developer API mode.");
+      }
+
       return toObject;
     }
 
@@ -221,6 +253,14 @@ namespace Google.GenAI {
       } else if (discriminatorValueValidationDataset == "DISTILLATION") {
         if (Common.GetValueByPath(fromObject, new string[] { "validationDataset" }) != null) {
           Common.SetValueByPath(parentObject, new string[] { "distillationSpec" },
+                                TuningValidationDatasetToVertex(
+                                    Common.ParseToJsonNode(Common.GetValueByPath(
+                                        fromObject, new string[] { "validationDataset" })),
+                                    toObject, rootObject));
+        }
+      } else if (discriminatorValueValidationDataset == "REINFORCEMENT_TUNING") {
+        if (Common.GetValueByPath(fromObject, new string[] { "validationDataset" }) != null) {
+          Common.SetValueByPath(parentObject, new string[] { "reinforcementTuningSpec" },
                                 TuningValidationDatasetToVertex(
                                     Common.ParseToJsonNode(Common.GetValueByPath(
                                         fromObject, new string[] { "validationDataset" })),
@@ -263,6 +303,13 @@ namespace Google.GenAI {
               parentObject, new string[] { "distillationSpec", "hyperParameters", "epochCount" },
               Common.GetValueByPath(fromObject, new string[] { "epochCount" }));
         }
+      } else if (discriminatorValueEpochCount == "REINFORCEMENT_TUNING") {
+        if (Common.GetValueByPath(fromObject, new string[] { "epochCount" }) != null) {
+          Common.SetValueByPath(
+              parentObject,
+              new string[] { "reinforcementTuningSpec", "hyperParameters", "epochCount" },
+              Common.GetValueByPath(fromObject, new string[] { "epochCount" }));
+        }
       }
 
       JsonNode discriminatorLearningRateMultiplier =
@@ -291,6 +338,14 @@ namespace Google.GenAI {
           Common.SetValueByPath(
               parentObject,
               new string[] { "distillationSpec", "hyperParameters", "learningRateMultiplier" },
+              Common.GetValueByPath(fromObject, new string[] { "learningRateMultiplier" }));
+        }
+      } else if (discriminatorValueLearningRateMultiplier == "REINFORCEMENT_TUNING") {
+        if (Common.GetValueByPath(fromObject, new string[] { "learningRateMultiplier" }) != null) {
+          Common.SetValueByPath(
+              parentObject,
+              new string[] { "reinforcementTuningSpec", "hyperParameters",
+                             "learningRateMultiplier" },
               Common.GetValueByPath(fromObject, new string[] { "learningRateMultiplier" }));
         }
       }
@@ -350,6 +405,13 @@ namespace Google.GenAI {
               parentObject, new string[] { "distillationSpec", "hyperParameters", "adapterSize" },
               Common.GetValueByPath(fromObject, new string[] { "adapterSize" }));
         }
+      } else if (discriminatorValueAdapterSize == "REINFORCEMENT_TUNING") {
+        if (Common.GetValueByPath(fromObject, new string[] { "adapterSize" }) != null) {
+          Common.SetValueByPath(
+              parentObject,
+              new string[] { "reinforcementTuningSpec", "hyperParameters", "adapterSize" },
+              Common.GetValueByPath(fromObject, new string[] { "adapterSize" }));
+        }
       }
 
       JsonNode discriminatorTuningMode =
@@ -390,6 +452,13 @@ namespace Google.GenAI {
           Common.SetValueByPath(parentObject,
                                 new string[] { "distillationSpec", "hyperParameters", "batchSize" },
                                 Common.GetValueByPath(fromObject, new string[] { "batchSize" }));
+        }
+      } else if (discriminatorValueBatchSize == "REINFORCEMENT_TUNING") {
+        if (Common.GetValueByPath(fromObject, new string[] { "batchSize" }) != null) {
+          Common.SetValueByPath(
+              parentObject,
+              new string[] { "reinforcementTuningSpec", "hyperParameters", "batchSize" },
+              Common.GetValueByPath(fromObject, new string[] { "batchSize" }));
         }
       }
 
@@ -450,6 +519,46 @@ namespace Google.GenAI {
       if (Common.GetValueByPath(fromObject, new string[] { "encryptionSpec" }) != null) {
         Common.SetValueByPath(parentObject, new string[] { "encryptionSpec" },
                               Common.GetValueByPath(fromObject, new string[] { "encryptionSpec" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "rewardConfig" }) != null) {
+        Common.SetValueByPath(parentObject,
+                              new string[] { "reinforcementTuningSpec", "singleRewardConfig" },
+                              Common.GetValueByPath(fromObject, new string[] { "rewardConfig" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "compositeRewardConfig" }) != null) {
+        Common.SetValueByPath(
+            parentObject, new string[] { "reinforcementTuningSpec", "compositeRewardConfig" },
+            Common.GetValueByPath(fromObject, new string[] { "compositeRewardConfig" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "samplesPerPrompt" }) != null) {
+        Common.SetValueByPath(
+            parentObject,
+            new string[] { "reinforcementTuningSpec", "hyperParameters", "samplesPerPrompt" },
+            Common.GetValueByPath(fromObject, new string[] { "samplesPerPrompt" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "evaluateInterval" }) != null) {
+        Common.SetValueByPath(
+            parentObject,
+            new string[] { "reinforcementTuningSpec", "hyperParameters", "evaluateInterval" },
+            Common.GetValueByPath(fromObject, new string[] { "evaluateInterval" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "checkpointInterval" }) != null) {
+        Common.SetValueByPath(
+            parentObject,
+            new string[] { "reinforcementTuningSpec", "hyperParameters", "checkpointInterval" },
+            Common.GetValueByPath(fromObject, new string[] { "checkpointInterval" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "maxOutputTokens" }) != null) {
+        Common.SetValueByPath(
+            parentObject,
+            new string[] { "reinforcementTuningSpec", "hyperParameters", "maxOutputTokens" },
+            Common.GetValueByPath(fromObject, new string[] { "maxOutputTokens" }));
       }
 
       return toObject;
@@ -939,6 +1048,12 @@ namespace Google.GenAI {
                                 new string[] { "distillationSpec", "promptDatasetUri" },
                                 Common.GetValueByPath(fromObject, new string[] { "gcsUri" }));
         }
+      } else if (discriminatorValueGcsUri == "REINFORCEMENT_TUNING") {
+        if (Common.GetValueByPath(fromObject, new string[] { "gcsUri" }) != null) {
+          Common.SetValueByPath(parentObject,
+                                new string[] { "reinforcementTuningSpec", "trainingDatasetUri" },
+                                Common.GetValueByPath(fromObject, new string[] { "gcsUri" }));
+        }
       }
 
       JsonNode discriminatorVertexDatasetResource =
@@ -963,6 +1078,12 @@ namespace Google.GenAI {
         if (Common.GetValueByPath(fromObject, new string[] { "vertexDatasetResource" }) != null) {
           Common.SetValueByPath(
               parentObject, new string[] { "distillationSpec", "promptDatasetUri" },
+              Common.GetValueByPath(fromObject, new string[] { "vertexDatasetResource" }));
+        }
+      } else if (discriminatorValueVertexDatasetResource == "REINFORCEMENT_TUNING") {
+        if (Common.GetValueByPath(fromObject, new string[] { "vertexDatasetResource" }) != null) {
+          Common.SetValueByPath(
+              parentObject, new string[] { "reinforcementTuningSpec", "trainingDatasetUri" },
               Common.GetValueByPath(fromObject, new string[] { "vertexDatasetResource" }));
         }
       }

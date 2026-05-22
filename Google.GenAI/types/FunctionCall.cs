@@ -23,13 +23,15 @@ using Google.GenAI.Serialization;
 
 namespace Google.GenAI.Types {
   /// <summary>
-  /// A function call.
+  /// A predicted FunctionCall returned from the model that contains a string representing the
+  /// FunctionDeclaration.name and a structured JSON object containing the parameters and their
+  /// values.
   /// </summary>
 
   public record FunctionCall {
     /// <summary>
-    /// The unique id of the function call. If populated, the client to execute the `function_call`
-    /// and return the response with the matching `id`.
+    /// Optional. The unique id of the function call. If populated, the client to execute the
+    /// `function_call` and return the response with the matching `id`.
     /// </summary>
     [JsonPropertyName("id")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

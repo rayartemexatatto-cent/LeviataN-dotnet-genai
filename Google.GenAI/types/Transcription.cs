@@ -45,6 +45,16 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
+    /// The BCP-47 language code of the transcription.
+    /// </summary>
+    [JsonPropertyName("languageCode")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public string
+        ? LanguageCode {
+            get; set;
+          }
+
+    /// <summary>
     /// Deserializes a JSON string to a Transcription object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>

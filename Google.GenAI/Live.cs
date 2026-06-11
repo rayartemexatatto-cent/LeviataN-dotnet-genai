@@ -337,6 +337,11 @@ namespace Google.GenAI
           result = await _webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
           if (result.MessageType == WebSocketMessageType.Close)
           {
+            if (result.CloseStatus.HasValue && result.CloseStatus != WebSocketCloseStatus.NormalClosure)
+              {
+                throw new InvalidOperationException(
+                  $"Server closed the WebSocket connection: [{result.CloseStatus}] {result.CloseStatusDescription}");
+              }
             return null;
           }
           messageStream.Write(buffer, 0, result.Count);

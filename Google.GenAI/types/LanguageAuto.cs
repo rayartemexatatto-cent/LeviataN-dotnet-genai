@@ -23,37 +23,20 @@ using Google.GenAI.Serialization;
 
 namespace Google.GenAI.Types {
   /// <summary>
-  /// Voice activity signal.
+  /// Indicates the language of the audio should be automatically detected.
   /// </summary>
 
-  public record VoiceActivity {
+  public record LanguageAuto {
     /// <summary>
-    /// The type of the voice activity signal.
-    /// </summary>
-    [JsonPropertyName("voiceActivityType")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public VoiceActivityType ? VoiceActivityType { get; set; }
-
-    /// <summary>
-    /// The time voice activity detected in audio time, relative to the start of the audio stream.
-    /// </summary>
-    [JsonPropertyName("audioOffset")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string
-        ? AudioOffset {
-            get; set;
-          }
-
-    /// <summary>
-    /// Deserializes a JSON string to a VoiceActivity object.
+    /// Deserializes a JSON string to a LanguageAuto object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>
     /// <param name="options">Optional JsonSerializerOptions.</param>
-    /// <returns>The deserialized VoiceActivity object, or null if deserialization fails.</returns>
-    public static VoiceActivity
+    /// <returns>The deserialized LanguageAuto object, or null if deserialization fails.</returns>
+    public static LanguageAuto
         ? FromJson(string jsonString, JsonSerializerOptions? options = null) {
       try {
-        return JsonSerializer.Deserialize<VoiceActivity>(jsonString, options);
+        return JsonSerializer.Deserialize<LanguageAuto>(jsonString, options);
       } catch (JsonException e) {
         Console.Error.WriteLine($"Error deserializing JSON: {e.ToString()}");
         return null;

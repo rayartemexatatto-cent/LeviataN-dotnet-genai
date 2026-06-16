@@ -23,37 +23,27 @@ using Google.GenAI.Serialization;
 
 namespace Google.GenAI.Types {
   /// <summary>
-  /// Voice activity signal.
+  /// Provides hints to the model about possible languages present in the audio.
   /// </summary>
 
-  public record VoiceActivity {
+  public record LanguageHints {
     /// <summary>
-    /// The type of the voice activity signal.
+    /// BCP-47 language codes. At least one must be specified.
     /// </summary>
-    [JsonPropertyName("voiceActivityType")]
+    [JsonPropertyName("languageCodes")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public VoiceActivityType ? VoiceActivityType { get; set; }
+    public List<string> ? LanguageCodes { get; set; }
 
     /// <summary>
-    /// The time voice activity detected in audio time, relative to the start of the audio stream.
-    /// </summary>
-    [JsonPropertyName("audioOffset")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string
-        ? AudioOffset {
-            get; set;
-          }
-
-    /// <summary>
-    /// Deserializes a JSON string to a VoiceActivity object.
+    /// Deserializes a JSON string to a LanguageHints object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>
     /// <param name="options">Optional JsonSerializerOptions.</param>
-    /// <returns>The deserialized VoiceActivity object, or null if deserialization fails.</returns>
-    public static VoiceActivity
+    /// <returns>The deserialized LanguageHints object, or null if deserialization fails.</returns>
+    public static LanguageHints
         ? FromJson(string jsonString, JsonSerializerOptions? options = null) {
       try {
-        return JsonSerializer.Deserialize<VoiceActivity>(jsonString, options);
+        return JsonSerializer.Deserialize<LanguageHints>(jsonString, options);
       } catch (JsonException e) {
         Console.Error.WriteLine($"Error deserializing JSON: {e.ToString()}");
         return null;

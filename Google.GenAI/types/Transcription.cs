@@ -23,7 +23,7 @@ using Google.GenAI.Serialization;
 
 namespace Google.GenAI.Types {
   /// <summary>
-  /// Audio transcription in Server Conent.
+  /// Audio transcription in Server Content.
   /// </summary>
 
   public record Transcription {

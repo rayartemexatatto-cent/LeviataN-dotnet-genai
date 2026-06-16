@@ -40,6 +40,22 @@ namespace Google.GenAI {
             "languageCodes parameter is only supported in Gemini Enterprise Agent Platform mode, not in Gemini Developer API mode.");
       }
 
+      if (Common.GetValueByPath(fromObject, new string[] { "languageAuto" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "languageAuto" },
+                              Common.GetValueByPath(fromObject, new string[] { "languageAuto" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "languageHints" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "languageHints" },
+                              Common.GetValueByPath(fromObject, new string[] { "languageHints" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "adaptationPhrases" }) != null) {
+        Common.SetValueByPath(
+            toObject, new string[] { "adaptationPhrases" },
+            Common.GetValueByPath(fromObject, new string[] { "adaptationPhrases" }));
+      }
+
       return toObject;
     }
 
@@ -1846,6 +1862,11 @@ namespace Google.GenAI {
                               Common.GetValueByPath(fromObject, new string[] { "type" }));
       }
 
+      if (Common.GetValueByPath(fromObject, new string[] { "audioOffset" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "audioOffset" },
+                              Common.GetValueByPath(fromObject, new string[] { "audioOffset" }));
+      }
+
       return toObject;
     }
 
@@ -1855,6 +1876,11 @@ namespace Google.GenAI {
       if (Common.GetValueByPath(fromObject, new string[] { "type" }) != null) {
         Common.SetValueByPath(toObject, new string[] { "voiceActivityType" },
                               Common.GetValueByPath(fromObject, new string[] { "type" }));
+      }
+
+      if (Common.GetValueByPath(fromObject, new string[] { "audioOffset" }) != null) {
+        Common.SetValueByPath(toObject, new string[] { "audioOffset" },
+                              Common.GetValueByPath(fromObject, new string[] { "audioOffset" }));
       }
 
       return toObject;

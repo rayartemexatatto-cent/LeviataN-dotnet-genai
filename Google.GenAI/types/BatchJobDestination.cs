@@ -23,7 +23,7 @@ using Google.GenAI.Serialization;
 
 namespace Google.GenAI.Types {
   /// <summary>
-  /// Config for `des` parameter.
+  /// Config for `dest` parameter.
   /// </summary>
 
   public record BatchJobDestination {

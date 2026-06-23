@@ -58,6 +58,16 @@ namespace Google.GenAI.Types {
           }
 
     /// <summary>
+    /// Optional. Disabled safety policies for computer use.
+    /// </summary>
+    [JsonPropertyName("disabledSafetyPolicies")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<SafetyPolicy>
+        ? DisabledSafetyPolicies {
+            get; set;
+          }
+
+    /// <summary>
     /// Deserializes a JSON string to a ComputerUse object.
     /// </summary>
     /// <param name="jsonString">The JSON string to deserialize.</param>

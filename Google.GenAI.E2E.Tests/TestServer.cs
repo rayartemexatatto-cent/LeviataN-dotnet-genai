@@ -17,6 +17,7 @@
 using System.IO;
 
 using Google.Apis.Auth.OAuth2;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestServerSdk;
 
 public class TestServer {
@@ -24,12 +25,28 @@ public class TestServer {
   public static TestServerProcess StartTestServer() {
     var _project = System.Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT");
     string _apiKey = System.Environment.GetEnvironmentVariable("GOOGLE_API_KEY");
+    var logPath = Path.GetFullPath("../../../test-server.log");
+    try {
+      File.WriteAllText(logPath, $"=== Test Server Started Mode: {(IsReplayMode ? "replay" : "record")} ===\n");
+    } catch {
+      // Ignore log write failure if directory doesn't exist yet
+    }
+
     var options = new TestServerOptions {
       ConfigPath = Path.GetFullPath("../test-server.yml"),
       RecordingDir = Path.GetFullPath("../../Recordings"),
       Mode = IsReplayMode ? "replay" : "record",
       BinaryPath = Path.GetFullPath("./test-server"),
-      TestServerSecrets = $"{_project},{_apiKey}"
+      TestServerSecrets = $"{_project},{_apiKey}",
+      OnStdOut = (msg) => {
+        try { File.AppendAllText(logPath, $"[STDOUT] {msg}\n"); } catch {}
+      },
+      OnStdErr = (msg) => {
+        try { File.AppendAllText(logPath, $"[STDERR] {msg}\n"); } catch {}
+      },
+      OnError = (msg) => {
+        try { File.AppendAllText(logPath, $"[ERROR] {msg}\n"); } catch {}
+      }
     };
 
     var server = new TestServerProcess(options);
@@ -52,5 +69,20 @@ public class TestServer {
   /// </summary>
   public static ICredential? GetCredentialForTestMode() {
     return IsReplayMode ? new MockCredential() : null;
+  }
+}
+
+[TestClass]
+public class AssemblyInitializer {
+  private static TestServerProcess? _server;
+
+  [AssemblyInitialize]
+  public static void AssemblyInit(TestContext context) {
+    _server = TestServer.StartTestServer();
+  }
+
+  [AssemblyCleanup]
+  public static void AssemblyCleanup() {
+    TestServer.StopTestServer(_server);
   }
 }

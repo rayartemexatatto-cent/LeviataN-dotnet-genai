@@ -28,26 +28,12 @@ using TestServerSdk;
 
 [TestClass]
 public class LiveEphemeralTokenTest {
-  private static TestServerProcess? _server;
   private Client geminiClient;
   private string geminiModelName;
   public TestContext TestContext { get; set; }
 
-  [ClassInitialize]
-  public static void ClassInit(TestContext _) {
-    _server = TestServer.StartTestServer();
-  }
-
-  [ClassCleanup]
-  public static void ClassCleanup() {
-    TestServer.StopTestServer(_server);
-  }
-
   [TestInitialize]
   public void TestInit() {
-    if (_server == null) {
-      throw new InvalidOperationException("Test server is not initialized.");
-    }
     var geminiClientHttpOptions = new GoogleType.HttpOptions {
       Headers = new Dictionary<string, string> { { "Test-Name",
                                                    $"{GetType().Name}.{TestContext.TestName}" } },
@@ -63,6 +49,7 @@ public class LiveEphemeralTokenTest {
   }
 
   [TestMethod]
+  [Timeout(60000)]
   public async Task LiveEphemeralTokenGeminiTest() {
     var tokenConfig = new GoogleType.CreateAuthTokenConfig {
       LockAdditionalFields = new List<string>(),

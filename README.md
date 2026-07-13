@@ -2080,7 +2080,7 @@ if __name__ == "__main__":
 ```
 agente_mapeador_reactivo.py
 
-🎯 LO QUE LOGRASTE
+🎯 LO QUE Logramos
 
 Paso Resultado
 Extraer El código invasor ahora es visible

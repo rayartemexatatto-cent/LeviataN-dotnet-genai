@@ -97,3 +97,103 @@ jobs:
 
           echo "✅ Documentation built successfully"
           echo "📊 Generated $html_count HTML files"
+
+          [Push/PR a principal]      
+          │
+          ▼
+┌─────────────────────────────────────────────────────────────┐
+│  🛡️ CENTINEL: Bloqueo de Invasión                             │
+│  • Bloquea copybara                                          │
+│  • Bloquea yinghsienwu                                       │
+│  • Permite solo al Forjador                                  │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────┐
+│  📖 Test Docs Build                                           │
+│  • Verifica que la documentación compile                     │
+│  • Solo se ejecuta en googleapis/dotnet-genai                │
+│  • Genera HTML de documentación                              │
+└────────────────────────────┬────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────┐
+│  ✅ PR Válido — Código + Documentación verificados            │
+└─────────────────────────────────────────────────────────────┘
+
+                 name: 🛡️ CENTINEL — Defensa + Verificación
+
+on:
+  push:
+    branches:
+      - principal
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  #══════════════════════════════════════════════════
+  # FASE 1: BLOQUEO DE INVASIÓN  #══════════════════════════════════════════════════
+  bloquear-invasion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      
+      - name: 🛡️ Verificar autor
+        run: |
+          AUTHOR=$(git log -1 --pretty=%an)
+          if [[ "$AUTHOR" == *"copybara"* ]] || [[ "$AUTHOR" == *"yinghsienwu"* ]]; then
+            echo "🚨 ALERTA: Autor no autorizado detectado: $AUTHOR"
+            exit 1
+          fi
+          echo "✅ Autor verificado: $AUTHOR"
+      
+      - name: 🔒 Inyectar reglas de soberanía
+        run: |
+          git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+          git config --add remote.origin.fetch "^refs/heads/sincronizacion-google"
+          echo "🛡️ Reglas de soberanía inyectadas."
+
+  #══════════════════════════════════════════════════
+  # FASE 2: VERIFICACIÓN DE DOCUMENTACIÓN  #══════════════════════════════════════════════════
+  test-docs-build:
+    needs: bloquear-invasion
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v5
+
+      - name: Setup .NET ⚙️
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install DocFX 🛠️
+        run: dotnet tool update -g docfx
+
+      - name: Create index.md from README.md
+        run: cp README.md index.md
+
+      - name: Generate DocFx metadata
+        run: docfx metadata docfx.json
+
+      - name: Build Documentation 📖
+        run: docfx build docfx.json --warningsAsErrors
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "./_site" ]; then
+            echo "❌ Error: _site directory not found"
+            exit 1
+          fi
+          if [ ! -f "./_site/index.html" ]; then
+            echo "❌ Error: index.html not generated"
+            exit 1
+          fi
+          html_count=$(find ./_site -name "*.html" | wc -l)
+          if [ "$html_count" -eq 0 ]; then
+            echo "❌ Error: No HTML files generated"
+            exit 1
+          fi
+          echo "✅ Documentation built successfully"
+          echo "📊 Generated $html_count HTML files"
